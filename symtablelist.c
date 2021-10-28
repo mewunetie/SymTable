@@ -3,6 +3,7 @@
 /* Author: Misrach Ewunetie */
 /*------------------------------------------------------------*/
 #include "symtable.h"
+#include <string.h>
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
@@ -55,7 +56,7 @@ int SymTable_put(SymTable_T oSymTable, const char *pcKey, const void *pvValue)
         return 0;
 
 
-    pvKey = (const char *)malloc(sizeof(const char));
+    pvKey = (char *)malloc(sizeof(char) * strlen(pcKey));
     strcpy(pvKey, pcKey);
     
     
@@ -84,7 +85,7 @@ static struct SymTableNode *SymTable_findNode(SymTable_T oSymTable, const char *
     struct SymTableNode *psNextNode;
     
     assert(oSymTable != NULL);
-    assert(*pcKey != NULL);
+    assert(pcKey != NULL);
     
     for (psCurrentNode = oSymTable->psFirstNode;
         psCurrentNode != NULL;
